@@ -1,0 +1,25 @@
+on:
+  workflow_dispatch:
+  push:
+    branches: main
+
+name: Publish website
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to droplet
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.HOST}}
+          username: ${{secrets.USERNAME}}
+          key: ${{secrets.KEY}}
+          script: |
+            cd ~
+            git clone git@github.com:CantStopWontStop/afromation_homepage.git
+            rm -r /var/www/afromation/public_html/*
+            mv . /var/www/afromation/public_html
