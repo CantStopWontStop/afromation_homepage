@@ -22,4 +22,5 @@ jobs:
             cd ~
             git clone git@github.com:CantStopWontStop/afromation_homepage.git
             rm -r /var/www/afromation/public_html/*
-            mv . /var/www/afromation/public_html
+            mv afromation_homepage/* /var/www/afromation/public_html
+            rm -r afromation_homepage
